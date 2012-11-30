@@ -5,9 +5,9 @@ $:.unshift File.join( File.dirname( __FILE__ ), './lib' )
 require 'de2'
 require 'pp'
 
-def main
-
-  url = 'http://www.amazon.co.jp/dp/B0067PGV1O/'
+def main( argv )
+  url = argv[0] || 'http://www.amazon.co.jp/dp/B008N6SO6U/'
+  puts url
 
   product = DE2::Product.new( url )
   star = product.star
@@ -32,8 +32,8 @@ def main
   end
 
   p '**********************************'
-  pp tmp.sort_by { |e| e[:star] }.reverse.uniq.slice(0..5)
+  pp tmp.sort_by { |e| e[:star] }.reverse.uniq.slice( 0..6 )
   puts tmp.size
 end
 
-main
+main( ARGV )
